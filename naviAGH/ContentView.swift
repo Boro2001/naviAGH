@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  naviAGH
-//
-//  Created by Mikołaj Borowicz on 14/10/2023.
-//
-
 import SwiftUI
 
 struct ContentView: View {
