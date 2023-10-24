@@ -6,49 +6,49 @@ struct CardView: View {
     let building: Building
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(building.symbol).font(.headline)
-            HStack{
-                Text(building.name)
-                if(building.wheelchairAccess != WheelchairAccess.no) {
-                    Image(systemName: "figure.roll")
-                        .foregroundColor(wheelchairIconColor)
-                    
+            VStack(alignment: .leading) {
+                Text(building.symbol).font(.title)
+                HStack{
+                    Text(building.name)
+                    Spacer()
+                    wheelChairIcon
+                    wifiIcon
                 }
-                if(building.wifiAvailable) { Image(systemName:"wifi") }
-            }
-        }.padding()
-        .background(cardColor)
+            }.padding()
+                .foregroundColor(theme.accentColor)
+                .background(theme.mainColor)
     }
     
-    var cardColor: Color {
-            switch building.type {
-            case .university:
-                return .blue
-            case .dormitory:
-                return .green
-            case .library:
-                return .orange
-            case .utility:
-                return .gray
-            }
-        }
-    var wheelchairIconColor: Color {
-        switch building.wheelchairAccess {
-        case .partial:
-            return .yellow
-        default:
-            return .green
+    var theme: Theme {
+        switch building.type {
+        case .dormitory: return .blue
+        case .university: return .pink
+        case .library: return .yellow
+        case .utility: return .green
         }
     }
     
+    var wifiIcon: Image {
+        if building.wifiAvailable{
+            return Image(systemName: "wifi")
+        }else {
+            return Image(systemName: "wifi.slash")
+        }
+    }
+    
+    var wheelChairIcon: Image {
+         switch building.wheelchairAccess {
+         case .yes: return Image(systemName: "figure.roll.runningpace")
+         case .partial: return Image(systemName: "figure.roll")
+         default: return Image(systemName: "figure.walk")
+        }
+    }
 }
 
-
 struct CardView_Previews: PreviewProvider {
+    static var building = Building.sampleData[0]
     static var previews: some View {
-    CardView(building: Building.sampleData[0])
-            .background()
+        CardView(building: building)
             .previewLayout(.fixed(width: 400, height: 60))
     }
 }

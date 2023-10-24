@@ -4,7 +4,7 @@ import SwiftUI
 struct naviAGHApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CardListView(buildings: Building.sampleData)
         }
     }
 }
