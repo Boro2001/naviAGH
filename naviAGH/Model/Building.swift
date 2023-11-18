@@ -26,9 +26,7 @@ struct Building: Identifiable {
     var wheelchairAccess: WheelchairAccess
     var shape: MKPolygon
     var type: BuildingType
-    var favourite: Bool = false
 }
-
 
 extension Building {
     static let sampleData: [Building] =
